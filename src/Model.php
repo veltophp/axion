@@ -1,40 +1,5 @@
 <?php
 
-/**
- * Class Model in namespace Veltophp\Axion.
- *
- * Structure:
- * - Extends basic database interaction capabilities using PDO.
- * - Manages a PDO connection (`$pdo`), the associated database table (`$table`),
- * an array of fillable attributes (`$fillable`), query conditions (`$conditions`),
- * and a flag to enable timestamps (`$timestamps`).
- * - Includes a constructor (`__construct()`) to initialize the database connection and boot timestamp functionality.
- * - Provides static methods for common database operations: `create()`, `all()`, `find()`, `findBy()`, `update()`, `delete()`, `where()`, `first()`, `firstWhere()`, `count()`, `paginate()`. These act as static entry points to instance methods.
- * - Contains protected instance methods for core database interactions: `init()`, `bootTimestamps()`, `insert()`, `getAll()`, `findById()`, `findByColumn()`, `updateRecord()`, `deleteRecord()`, `getFirst()`, `getFirstWhere()`, `getCount()`, `getPaginated()`.
- * - Includes protected instance methods with timestamp support: `insertWithTimestamps()`, `updateRecordWithTimestamps()`.
- *
- * How it works:
- * - `__construct()`: Initializes the PDO connection by calling `init()` and sets up timestamp handling with `bootTimestamps()`.
- * - `init()`: Establishes a PDO connection to the SQLite database specified in the configuration. Sets error mode to exception.
- * - `bootTimestamps()`: Automatically adds 'created_at' and 'updated_at' to the `$fillable` array if `$timestamps` is true and they are not already present.
- * - Static methods create a new instance of the `Model` and call the corresponding instance method, providing a convenient static API.
- * - `insert()`: Inserts a new record into the table using the provided data, respecting the `$fillable` attributes. Uses prepared statements for security.
- * - `getAll()`: Retrieves all records from the table.
- * - `findById()`: Retrieves a single record based on its primary key (`id`).
- * - `findByColumn()`: Retrieves a single record based on a specific column and value.
- * - `updateRecord()`: Updates existing records based on a WHERE clause (can be an ID or an array of conditions), using only the `$fillable` attributes. Uses prepared statements.
- * - `deleteRecord()`: Deletes records based on a WHERE clause (can be an ID or an array of conditions). Uses prepared statements.
- * - `where()`: Starts building a conditional query, adding an 'AND' condition. Returns the model instance for method chaining.
- * - `orWhere()`: Adds an 'OR' condition to the query. Returns the model instance for method chaining.
- * - `get()`: Executes the built conditional query and returns all matching records as an array of objects.
- * - `first()`: Retrieves the first record from the table.
- * - `firstWhere()`: Retrieves the first record matching the given conditions.
- * - `count()`: Returns the total number of records in the table.
- * - `paginate()`: Retrieves records with pagination, returning an array containing the data, total count, per-page limit, current page, and last page number.
- * - `insertWithTimestamps()`: Calls `insert()` after automatically adding `created_at` and `updated_at` timestamps if `$timestamps` is true.
- * - `updateRecordWithTimestamps()`: Calls `updateRecord()` after automatically updating the `updated_at` timestamp if `$timestamps` is true.
- */
-
 namespace Velto\Axion;
 
 use PDO;
@@ -60,11 +25,11 @@ class Model
     protected function init(): void
     {
         if (!isset($this->pdo)) {
-            $driver = Env::get('DB_CONNECTION', 'sqlite');
-            $host = Env::get('DB_HOST', '127.0.0.1');
-            $dbname = Env::get('DB_DATABASE', 'database');
-            $username = Env::get('DB_USERNAME', 'root');
-            $password = Env::get('DB_PASSWORD', '');
+            $driver = Env::get('DB_CONNECTION');
+            $host = Env::get('DB_HOST');
+            $dbname = Env::get('DB_DATABASE');
+            $username = Env::get('DB_USERNAME');
+            $password = Env::get('DB_PASSWORD');
 
             switch ($driver) {
                 case 'mysql':
