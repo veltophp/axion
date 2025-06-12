@@ -17,7 +17,7 @@ class Auth
 
         if (!Session::has('user')) {
      
-            header('Location: /login');
+            abort(404);
 
             exit;
         }

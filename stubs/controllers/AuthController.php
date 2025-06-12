@@ -6,6 +6,8 @@ use Velto\Axion\Controller;
 use Velto\Axion\Models\User;
 use Velto\Axion\Session;
 use Velto\Core\Mail;
+use Velto\Core\Env;
+
 
 
 class AuthController extends Controller
@@ -13,10 +15,18 @@ class AuthController extends Controller
 
     public function login()
     {
+        if (!Env::get('AUTH_LOGIN')) {
+            abort(404);
+        }        
+
         return view('axion::auth.login');
     }
     public function register()
     {
+        if (!Env::get('AUTH_REGISTER')) {
+            abort(404);
+        } 
+
         return view('axion::auth.register');
     }
     public function verifyEmail()
@@ -167,7 +177,7 @@ class AuthController extends Controller
 
         Session::regenerate();
 
-        Session::set('user', $user);
+        Session::set('user', $user);  
         
         return redirect('/dashboard');
     }

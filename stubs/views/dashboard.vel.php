@@ -74,10 +74,6 @@
                     <span class="text-gray-500 dark:text-gray-400">Package</span>
                     <span class="font-medium text-gray-800 dark:text-gray-100">Axion | VeltoPHP</span>
                 </div>
-                <div class="flex items-center justify-between py-3 border-b border-gray-200 dark:border-gray-700">
-                    <span class="text-gray-500 dark:text-gray-400">Version</span>
-                    <span class="font-medium text-gray-800 dark:text-gray-100">1.2.0</span>
-                </div>
             </div>
         </div>
     </div>
