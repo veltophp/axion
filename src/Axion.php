@@ -12,9 +12,9 @@ class Axion
 
     public static function loadRoutes(): void
     {
-        $basePath = getcwd() . '/axion/routes/';
+        $basePath = dirname(getcwd()) . '/axion/routes/';
 
-        // Abaikan semua jika folder axion belum dipublish
+        // Jika folder tidak ada, anggap tidak pakai Axion (tidak perlu error)
         if (!is_dir($basePath)) {
             return;
         }
@@ -22,12 +22,11 @@ class Axion
         foreach (['auth.php', 'web.php'] as $file) {
             $fullPath = $basePath . $file;
 
+            // Hanya load jika file ada
             if (file_exists($fullPath)) {
                 require_once $fullPath;
-            } else {
-                // Opsional: tampilkan warning tanpa menghentikan eksekusi
-                echo "⚠️  Optional route not found: {$file}\n";
             }
+            // Jika file tidak ada, cukup dilewatkan (tidak error)
         }
     }
 
