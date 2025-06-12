@@ -1,0 +1,29 @@
+{
+    "name": "veltophp/axion",
+    "description": "Axion - Modular MVC Admin Panel for VeltoPHP",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+      {
+        "name": "veltophp",
+        "email": "dev@veltophp.com"
+      }
+    ],
+    "require": {
+      "php": ">=8.0",
+      "veltophp/velto-core": "^1.0.5"
+    },
+    "autoload": {
+      "psr-4": {
+        "Veltophp\\Axion\\": "axion/src/"
+      }
+    },
+    "extra": {
+      "branch-alias": {
+        "dev-main": "1.0-dev"
+      }
+    },
+    "minimum-stability": "stable",
+    "prefer-stability": true
+  }
+  
