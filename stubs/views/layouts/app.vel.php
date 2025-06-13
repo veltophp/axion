@@ -136,8 +136,8 @@
             </div>
 
             <!-- Navigation -->
-            <nav class="flex-1 px-3 py-4 space-y-1 overflow-y-auto" id="sidebar-nav">
-                <div class="space-y-1">
+            <nav class="flex-1 px-3 py-4 space-y-3 overflow-y-auto" id="sidebar-nav">
+                <div class="space-y-6">
                     <a href="{{ route('dashboard') }}" class="flex items-center px-3 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-primary-50 dark:hover:bg-gray-700/50 group @active('/dashboard', 'font-medium bg-primary-50 dark:bg-gray-700/50 text-primary-600 dark:text-primary-400') transition-slow">
                         <i class="fas fa-tachometer-alt w-5 text-center text-gray-500 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-400"></i>
                         <span class="ml-3 whitespace-nowrap">Dashboard</span>
@@ -152,40 +152,9 @@
                         <i class="fas fa-cog w-5 text-center text-gray-500 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-400"></i>
                         <span class="ml-3 whitespace-nowrap">Settings</span>
                     </a>
-                
-                    @role('admin')
-                    <div class="group">
-                        <button type="button" class="w-full flex items-center px-3 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-primary-50 dark:hover:bg-gray-700/50 group-hover:bg-primary-50 dark:group-hover:bg-gray-700/50 transition-slow" onclick="this.nextElementSibling.classList.toggle('hidden')">
-                            <i class="fas fa-blog w-5 text-center text-gray-500 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-400"></i>
-                            <span class="ml-3 whitespace-nowrap">Blog</span>
-                            <svg class="ml-auto h-4 w-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path d="M19 9l-7 7-7-7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                        </button>
-                
-                        <div class="ml-8 mt-1 space-y-1 hidden">
-                            <a href="{{ route('create.post') }}" class="flex items-center px-3 py-2 rounded-lg text-sm text-gray-700 dark:text-gray-300 hover:bg-primary-50 dark:hover:bg-gray-700/50 @active('/blog/post/create', 'font-medium bg-primary-50 dark:bg-gray-700/50 text-primary-600 dark:text-primary-400') transition-slow">
-                                <i class="fas fa-plus w-4 text-center text-gray-500 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-400"></i>
-                                <span class="ml-3">Create Post</span>
-                            </a>
-                            <a href="{{ route('all.post') }}" class="flex items-center px-3 py-2 rounded-lg text-sm text-gray-700 dark:text-gray-300 hover:bg-primary-50 dark:hover:bg-gray-700/50 @active('/blog/post/all-post', 'font-medium bg-primary-50 dark:bg-gray-700/50 text-primary-600 dark:text-primary-400') transition-slow">
-                                <i class="fas fa-list w-4 text-center text-gray-500 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-400"></i>
-                                <span class="ml-3">All Posts</span>
-                            </a>
-                            <a href="{{ route('categories') }}" class="flex items-center px-3 py-2 rounded-lg text-sm text-gray-700 dark:text-gray-300 hover:bg-primary-50 dark:hover:bg-gray-700/50 transition-slow">
-                                <i class="fas fa-folder w-4 text-center text-gray-500 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-400"></i>
-                                <span class="ml-3">Categories</span>
-                            </a>
-                            <a href="{{ route('topics') }}" class="flex items-center px-3 py-2 rounded-lg text-sm text-gray-700 dark:text-gray-300 hover:bg-primary-50 dark:hover:bg-gray-700/50 transition-slow">
-                                <i class="fas fa-tags w-4 text-center text-gray-500 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-400"></i>
-                                <span class="ml-3">Topics</span>
-                            </a>
-                        </div>
-                    </div> 
-                    @end_role
                 </div>
                 
-                <div class="pt-4 mt-4 border-t border-gray-200 dark:border-gray-800">
+                <div class="py-8 border-t border-gray-200 dark:border-gray-800">
                     <form action="{{route('logout')}}" method="POST" class="flex items-center px-3 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-primary-50 dark:hover:bg-gray-700/50 group transition-slow">
                         {!! csrf_field() !!}
                         <button type="submit" class="flex items-center space-x-3 w-full">

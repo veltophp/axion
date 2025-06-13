@@ -50,10 +50,10 @@
             <div class="text-center mt-8 space-y-2">
                 @if (env('AUTH_REGISTER'))
                     <a href="{{ route('register') }}" class="text-blue-500 dark:text-blue-400 text-sm block hover:underline">Create Account</a>
+                    <a href="{{ route('forgot.password') }}" class="text-blue-500 dark:text-blue-400 text-sm block hover:underline">
+                        Forgot Password?
+                    </a>
                 @endif
-                <a href="{{ route('forgot.password') }}" class="text-blue-500 dark:text-blue-400 text-sm block hover:underline">
-                    Forgot Password?
-                </a>
             </div>
 
         </div>
