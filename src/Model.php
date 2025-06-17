@@ -361,31 +361,58 @@ class Model
         return $this->updateRecord($where, $data);
     }
     // === Internal instance methods (original) ===
-    protected function insert(array $data): bool
+    public static function insert(array $rows): bool
+    {
+        $instance = new static;
+
+        if (empty($rows)) return false;
+
+        // Cek apakah satu data (bukan array of array)
+        if (!isset($rows[0])) {
+            return $instance->insertSingle($rows);
+        }
+
+        $columns = array_keys($rows[0]);
+        $columnList = implode(', ', $columns);
+        $placeholders = '(' . implode(', ', array_fill(0, count($columns), '?')) . ')';
+        $allPlaceholders = implode(', ', array_fill(0, count($rows), $placeholders));
+
+        $values = [];
+        foreach ($rows as $row) {
+            foreach ($columns as $col) {
+                $values[] = $row[$col] ?? null;
+            }
+        }
+
+        $sql = "INSERT INTO {$instance->table} ($columnList) VALUES $allPlaceholders";
+        $stmt = $instance->pdo->prepare($sql);
+        return $stmt->execute($values);
+    }
+
+    protected function insertSingle(array $data): bool
     {
         $fillableData = array_intersect_key($data, array_flip($this->fillable));
         $columns = implode(', ', array_keys($fillableData));
         $placeholders = implode(', ', array_map(fn($v) => ":$v", array_keys($fillableData)));
-    
+
         $stmt = $this->pdo->prepare("INSERT INTO {$this->table} ($columns) VALUES ($placeholders)");
-    
+
         foreach ($fillableData as $key => $value) {
             if ($this->isIntegerColumn($key)) {
-                if ($value === '') {
-                    $value = null; // atau 0 kalau kolom NOT NULL
-                }
+                if ($value === '') $value = null;
                 $paramType = PDO::PARAM_INT;
             } elseif (is_null($value)) {
                 $paramType = PDO::PARAM_NULL;
             } else {
                 $paramType = PDO::PARAM_STR;
             }
-        
+
             $stmt->bindValue(":$key", $value, $paramType);
-        }        
-    
+        }
+
         return $stmt->execute();
     }
+
     protected function isIntegerColumn(string $column): bool
     {
         $integerColumns = ['id', 'email_verified'];
